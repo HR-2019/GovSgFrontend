@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>{{ dialogTitle }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="fiscalPositionForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Year of balance</mat-label>
+      <input type="number" required="true" formControlName="yearOfBalance" matInput placeholder="2020">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="actualRevisedEstimated" placeholder="Revised">
+        <mat-option value="Actual">Actual</mat-option>
+        <mat-option value="Revised">Revised</mat-option>
+        <mat-option value="Estimated">Estimated</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Category</mat-label>
+      <input formControlName="category" matInput placeholder="Revenue">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Item</mat-label>
+      <input matInput formControlName="item" placeholder="Operating Revenue">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Amount</mat-label>
+      <input matInput formControlName="amount" type="number" placeholder="74274">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Percent Of gdp</mat-label>
+      <input matInput formControlName="percentOfGdp" type="number" placeholder="0.144">
+    </mat-form-field>
+  </form>
+  <div mat-dialog-actions [align]="'end'">
+    <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+    <button mat-raised-button color="primary" class="btn-save" (click)="addFiscalPosition()"> {{ btnAction }}</button>
+  </div>
+</div>
