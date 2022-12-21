@@ -50,9 +50,13 @@ export class FiscalPositionDialogAddComponent implements OnInit{
 
   addFiscalPosition(){
 
-    if (!this.editData){
-      if (this.fiscalPositionForm.valid){
-        this.fiscalPositionService.saveFiscalPosition(this.fiscalPositionForm.value)
+    if (this.fiscalPositionForm.invalid){
+      alert('All fields are required');
+      return;
+    }
+
+    if (!this.editData) {
+      this.fiscalPositionService.saveFiscalPosition(this.fiscalPositionForm.value)
         .subscribe({
           next: (res) => {
             alert('Fiscal position added!');
@@ -63,7 +67,6 @@ export class FiscalPositionDialogAddComponent implements OnInit{
             alert('Error while adding the fiscal position');
           }
         })
-      }
     } else {
       this.updateFiscalPosition();
     }
@@ -71,6 +74,7 @@ export class FiscalPositionDialogAddComponent implements OnInit{
   }
 
   updateFiscalPosition(){
+
     this.fiscalPositionService.updateFiscalPosition(this.editData.id, this.fiscalPositionForm.value)
     .subscribe({
       next: (res) => {
