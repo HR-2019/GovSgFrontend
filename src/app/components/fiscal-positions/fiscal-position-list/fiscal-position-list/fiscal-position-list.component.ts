@@ -30,6 +30,10 @@ export class FiscalPositionListComponent implements AfterViewInit{
   }
 
   ngAfterViewInit() {
+    this.getAllFiscalPositions();
+  }
+
+  getAllFiscalPositions(){
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 
     merge(this.sort.sortChange, this.paginator.page)
@@ -61,22 +65,37 @@ export class FiscalPositionListComponent implements AfterViewInit{
     this.dialog.open(FiscalPositionDialogAddComponent, {
       width:'30%',
       data:row
-    }).afterClosed().subscribe(val => {
-      if (val === 'update'){
-        this.fiscalPositionService.getAllFiscalPositions('id', 'asc', 0);
+    }).afterClosed().subscribe(
+      val => {
+        if (val === 'update'){
+          this.getAllFiscalPositions();
+        }
       }
-    })
+    )
   }
 
   deleteFiscalPosition(id: number){
     this.fiscalPositionService.deleteFiscalPosition(id).subscribe({
       next: (res) => {
         alert('Fiscal position deleted!');
+        this.getAllFiscalPositions();
       },
       error: () => {
         alert('Error while deleting the fiscal position!')
       }
     })
+  }
+
+  openDialog() {
+    this.dialog.open(FiscalPositionDialogAddComponent, {
+      width: '30%'
+    }).afterClosed().subscribe(
+      val => {
+        if (val === 'save'){
+          this.getAllFiscalPositions();
+        }
+      }
+    )
   }
 
 }
