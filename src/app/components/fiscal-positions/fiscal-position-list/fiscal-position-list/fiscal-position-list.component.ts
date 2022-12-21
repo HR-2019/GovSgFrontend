@@ -75,15 +75,19 @@ export class FiscalPositionListComponent implements AfterViewInit{
   }
 
   deleteFiscalPosition(id: number){
-    this.fiscalPositionService.deleteFiscalPosition(id).subscribe({
-      next: (res) => {
-        alert('Fiscal position deleted!');
-        this.getAllFiscalPositions();
-      },
-      error: () => {
-        alert('Error while deleting the fiscal position!')
-      }
-    })
+
+    if (confirm('Are you sure to delete the item with ID ' + id + '?')){
+      this.fiscalPositionService.deleteFiscalPosition(id).subscribe({
+        next: (res) => {
+          alert('Fiscal position deleted!');
+          this.getAllFiscalPositions();
+        },
+        error: () => {
+          alert('Error while deleting the fiscal position!')
+        }
+      })
+    }
+
   }
 
   openDialog() {
